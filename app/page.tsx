@@ -10,6 +10,7 @@ import "@aws-amplify/ui-react/styles.css";
 
 import Gallery from "./gallery";
 import Pottery from "./pottery";
+import { Authenticator } from "@aws-amplify/ui-react";
 
 Amplify.configure(outputs);
 
@@ -41,24 +42,29 @@ export default function App() {
 
   return (
     <main>
-      <h1>Choose a Category</h1>
-      <div className="button-container">
-        <button onClick={() => handleCategoryChange("Gallery")}>Gallery</button>
-        <button onClick={() => handleCategoryChange("Pottery")}>Pottery</button>
-        <button onClick={() => handleCategoryChange("Clothes")}>Clothes</button>
-      </div>
-      
-      <style jsx>{`
-        .button-container {
-          display: flex;
-          justify-content: space-around; /* Space out the buttons */
-          margin: 20px 0; /* Optional: Add some margin for spacing */
-        }
-      `}</style>
-      
-      {selectedCategory === "Gallery" && <Gallery />}
-      {selectedCategory === "Pottery" && <Pottery />}
-      {selectedCategory === "Clothes" && <Gallery />}
+      <Authenticator>
+        <br />
+        
+        <h1>Choose a Category</h1>
+        <div className="button-container">
+          <button onClick={() => handleCategoryChange("Gallery")}>Gallery</button>
+          <button onClick={() => handleCategoryChange("Pottery")}>Pottery</button>
+          <button onClick={() => handleCategoryChange("Clothes")}>Clothes</button>
+        </div>
+        
+        <style jsx>{`
+          .button-container {
+            display: flex;
+            justify-content: space-around; /* Space out the buttons */
+            margin: 20px 0; /* Optional: Add some margin for spacing */
+          }
+        `}</style>
+        
+        {selectedCategory === "Gallery" && <Gallery />}
+        {selectedCategory === "Pottery" && <Pottery />}
+        {selectedCategory === "Clothes" && <Gallery />}
+
+        </Authenticator>
       
     </main>
   );
