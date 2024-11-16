@@ -37,6 +37,45 @@ const schema = a.schema({
     ShippingAddress: a.string(),
   })
     .authorization((allow) => [allow.publicApiKey()]),
+
+Transaction: a
+  .model({
+    transactionId: a.string().id(),
+    orderId: a.string(),
+    paymentMethod: a.enum(["CreditCard", "PayPal", "BankTransfer", "Cash"]),
+    paymentStatus: a.enum(["Pending", "Transaction Successfull", "Transaction Failed", "Refunded"]).default("Pending"),
+    transactionDate: a.dateTime()'
+    amount: a.float(),
+  })
+  .authorization((allow) => [allow.publicApiKey()]),
+
+  Location: a
+  .model({
+    locationId: a.string().id(),
+    address: a.string(),
+    city: a.string(),
+    state: a.string(),
+    PostalCode: a.string(),
+    country: a.string(),
+    longitude: a.float(),
+    latitude: a.float(),
+  })
+  .authorization((allow) => [allow.publicApiKey()]),
+
+  User: a
+  .model({
+    userId: a.string().id(),
+    name: a.string(),
+    email: a.string(),
+    phone: a.string(),
+    registeredAt: a.dateTime(),
+    address: a.string(),
+    city: a.string(),
+    state: a.string(),
+    postalCode: a.String(),
+  })
+  .authorization((allow) => [allow.publicApiKey()]),
+    
 });
 
 
