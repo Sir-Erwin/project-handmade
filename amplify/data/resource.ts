@@ -23,6 +23,20 @@ const schema = a.schema({
       limitedSupply: a.boolean(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
+
+  Order: a
+  .model({
+    orderID: a.string().id(),
+    productId: a.string(),
+    quantity: a.integer(),
+    totalPrice: a.float(),
+    status: a.enum(["Pending", "Shipped", "Delivered", "Cancelled"]).default("Pending"),
+    orderesAt: a.dateTime(),
+    customerName: a.string(),
+    customerEmail: a.string(),
+    ShippingAddress: a.string(),
+  })
+    .authorization((allow) => [allow.publicApiKey()]),
 });
 
 
